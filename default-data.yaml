@@ -1,0 +1,6 @@
+htcondor_worker-expected-from-site-level-config:
+  htcondor_worker_use_role: &htcondor_worker_use_role "Execute"
+  htcondor_worker_host: { type: str(), required: true, use_default: false} #value needs to be hostname of container
+  htcondor_worker_allow_write: &htcondor_worker_allow_write "*"
+  htcondor_worker_starter_allow_run_as_owner: &htcondor_worker_starter_allow_run_as_owner "false"
+  htcondor_worker_execute_login_is_dedicated: &htcondor_worker_execute_login_is_dedicated "true"
