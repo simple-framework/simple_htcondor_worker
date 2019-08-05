@@ -9,7 +9,11 @@ host_requirements:
     - ports: 9196
       protocol: tcp
       action: accept
+      ipv6: true
+
   cvmfs: true
+  host_certificates: false
+
 level_2_configurators:
   sh:
     docker_run_parameters:
@@ -20,4 +24,3 @@ level_2_configurators:
       tty: true
       interactive: true
       detached: true
-      command: /bin/bash
