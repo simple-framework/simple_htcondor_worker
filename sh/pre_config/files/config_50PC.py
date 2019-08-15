@@ -16,7 +16,7 @@ class WorkerConfig(ConfigFile):
 
     def add_lightweight_component_queried_parameters(self):
         super().add_lightweight_component_queried_parameters()
-        self.lightweight_component_queried_category.add_key_value_query("CONDOR_HOST", "$.name")
+        self.lightweight_component_queried_category.add_key_value_query("CONDOR_HOST", "$.deploy.node")
 
     def add_advanced_parameters(self):
         super().add_advanced_parameters()
