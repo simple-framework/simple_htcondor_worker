@@ -11,11 +11,14 @@ class ConfigFile:
         self.augmented_site_level_config = augmented_site_level_config
         self.lightweight_component = get_lightweight_component(augmented_site_level_config, execution_id)
 
-        self.lightweight_component_queried_category = ParameterCategory("{name}_lightweight_component_queried".format(name=output_file),
-                                                                        self.lightweight_component)
-        self.global_queried_category = ParameterCategory("{name}_global_queried".format(name=output_file), augmented_site_level_config)
+        self.lightweight_component_queried_category = ParameterCategory(
+            "{name}_lightweight_component_queried".format(name=output_file),
+            self.lightweight_component)
+        self.global_queried_category = ParameterCategory("{name}_global_queried".format(name=output_file),
+                                                         augmented_site_level_config)
         self.static_category = ParameterCategory("{name}_static".format(name=output_file))
-        self.advanced_category = ParameterCategory("{name}_static".format(name=output_file), augmented_site_level_config)
+        self.advanced_category = ParameterCategory("{name}_static".format(name=output_file),
+                                                   augmented_site_level_config)
 
         self.categories.append(self.advanced_category)
         self.categories.append(self.global_queried_category)
@@ -47,7 +50,7 @@ class ConfigFile:
             output_file.write(line)
         output_file.close()
 
-    ### Default Categories ###
+    # Default Categories #
     def add_lightweight_component_queried_parameters(self):
         pass
 
@@ -59,3 +62,4 @@ class ConfigFile:
 
     def add_advanced_parameters(self):
         pass
+
