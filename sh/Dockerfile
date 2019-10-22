@@ -1,4 +1,9 @@
 FROM cern/cc7-base
+
+ENV SIMPLE_CONFIG_DIR=/etc/simple_grid
+ENV HTCONDOR_CE_CONFIG_DIR=/etc/condor-ce
+ENV HTCONDOR_CONFIG_DIR=/etc/condor
+
 RUN yum install -y wget
 RUN wget https://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor
 RUN rpm --import RPM-GPG-KEY-HTCondor
