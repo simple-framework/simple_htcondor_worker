@@ -6,7 +6,7 @@ echo "----------------------------------"
 # Copy HTCondor config files
 echo "Copying config files from $SMIPLE_CONFIG_DIR/config to $HTCONDOR_CONFIIG_DIR/config.d"
 cp $SIMPLE_CONFIG_DIR/config/50PC.conf $HTCONDOR_CONFIG_DIR/config.d/50PC.conf
-
+# Create Slot accounts dynamically
 echo "----------------------------------"
 echo "Starting daemons"
 echo "----------------------------------"
