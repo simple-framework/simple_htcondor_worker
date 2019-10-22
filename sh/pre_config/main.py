@@ -1,6 +1,7 @@
 import argparse
 import yaml
 from files.config_50PC import WorkerConfig
+from files.slots import Slots
 
 
 def parse_args():
@@ -26,3 +27,6 @@ if __name__ == "__main__":
 
     config_50PC = WorkerConfig("{output_dir}/50PC.conf".format(output_dir=output_dir), augmented_site_level_config, execution_id)
     config_50PC.generate_output_file()
+
+    slots = Slots("{output_dir}/slots".format(output_dir=output_dir), augmented_site_level_config, execution_id)
+    slots.generate_output_file()
