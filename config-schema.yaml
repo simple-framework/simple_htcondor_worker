@@ -1,7 +1,3 @@
-
 expected-from-site-level-config:
-  Use ROLE: {type: str(), required: true, use_default: true}
-  CONDOR_HOST: {type: str(), required: true, use_default: false}
-  ALLOW_WRITE: {type: str(), required: true, use_default: true}
-  STARTER_ALLOW_RUNAS_OWNER: {type: str(), required: true, use_default: true}
-  EXECUTE_LOGIN_IS_DEDICATED: {type: str(), required: true, use_default: true}
+  condor_host: {type: str(), required: false, use_default: false}
+  slots: {type: int(), required: true, use_default: true}
