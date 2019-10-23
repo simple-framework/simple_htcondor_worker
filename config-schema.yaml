@@ -1,3 +1,3 @@
 expected-from-site-level-config:
   condor_host: {type: str(), required: false, use_default: false}
-  slots: {type: int(), required: true, use_default: true}
+  num_slots: {type: int(), required: true, use_default: true}

@@ -1,2 +1,2 @@
 htcondor_worker-expected-from-site-level-config:
-  htcondor_worker_default_var_slots: &htcondor_worker_default_var_slots 30
+  htcondor_worker_default_var_num_slots: &htcondor_worker_default_var_num_slots 30
