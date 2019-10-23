@@ -19,7 +19,7 @@ class WorkerConfig(ConfigFile):
             self.advanced_category.add_key_value("SLOT{slot}_USER".format(slot=slot), "slot{slot}".format(slot=slot))
         execution_id = self.lightweight_component['execution_id']
         dns = get_dns_info(self.augmented_site_level_config, execution_id)
-        allow_write = '.'.join((dns['container_ip'].split('.')[0:-2] + ['*', '*']))
+        allow_write = '.'.join((dns['container_ip'].split('.')[0:-2] + ['*']))
         self.advanced_category.add_key_value("allow_write", allow_write)
         batch_ip = get_batch_dns_info(self.augmented_site_level_config)['container_ip']
         self.advanced_category.add_key_value("condor_host", batch_ip)
