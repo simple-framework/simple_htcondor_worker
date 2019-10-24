@@ -1,4 +1,4 @@
-from generic_helpers import get_dns_info, get_batch_dns_info
+from generic_helpers import get_dns_info
 from models.config_file import ConfigFile
 
 
@@ -25,5 +25,8 @@ class WorkerConfig(ConfigFile):
         dns = get_dns_info(self.augmented_site_level_config, execution_id)
         allow_write = '.'.join((dns['container_ip'].split('.')[0:-2] + ['*']))
         self.advanced_category.add_key_value("allow_write", allow_write)
-        batch_ip = get_batch_dns_info(self.augmented_site_level_config)['container_ip']
+
+        batch_execution_id = self.lightweight_component['config']['condor_host_execution_id']
+        batch_dns = get_dns_info(self.augmented_site_level_config, batch_execution_id)
+        batch_ip = batch_dns['container_ip']
         self.advanced_category.add_key_value("condor_host", batch_ip)
