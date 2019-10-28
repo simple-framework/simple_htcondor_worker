@@ -11,6 +11,7 @@ SLOTS_FILE="/etc/simple_grid/config/slots"
 while IFS= read -r USER
 do
     useradd "$USER"
+    chmod 777 /home/$USER
 done < "$SLOTS_FILE"
 
 echo "----------------------------------"
