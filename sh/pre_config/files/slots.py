@@ -10,3 +10,4 @@ class Slots(ConfigFile):
         num_slots = self.lightweight_component['config']['num_slots']
         for slot in range(0, num_slots):
             self.advanced_category.add("slot{slot}\n".format(slot=slot))
+        self.advanced_category.add("simple")
