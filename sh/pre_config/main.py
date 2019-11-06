@@ -1,7 +1,12 @@
+import os
 import argparse
 import yaml
+
 from files.config_50PC import WorkerConfig
 from files.slots import Slots
+from files.supplemental_config import SupplementalConfig
+
+from helpers.generic_helpers import get_lightweight_component
 
 
 def parse_args():
@@ -30,3 +35,12 @@ if __name__ == "__main__":
 
     slots = Slots("{output_dir}/slots".format(output_dir=output_dir), augmented_site_level_config, execution_id)
     slots.generate_output_file()
+
+    lc = get_lightweight_component(augmented_site_level_config, execution_id)
+
+    if os.path.exists('{output_dir}/supplemental_mapfile'.format(output_dir=output_dir)):
+        os.remove('{output_dir}/supplemental_mapfile'.format(output_dir=output_dir))
+
+    for component in lc.get('supplemental_config', []):
+        supplemental_config = SupplementalConfig(output_dir, augmented_site_level_config, execution_id, component)
+        supplemental_config.generate_output_file()
