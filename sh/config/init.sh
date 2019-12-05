@@ -16,7 +16,7 @@ done < "$SLOTS_FILE"
 
 echo "Copying supplemental configs..."
 while IFS=":" read -r source dest; do
-  mkdir -p $(dirname ${dest}) && cp $SIMPLE_CONFIG_DIR/config/$source ${dest}
+  mkdir -p $(dirname ${dest}) && cat $SIMPLE_CONFIG_DIR/config/$source >> ${dest}
 done < ${SIMPLE_CONFIG_DIR}/config/supplemental_mapfile
 
 echo "----------------------------------"
