@@ -15,6 +15,17 @@ do
 done < "$SLOTS_FILE"
 
 echo "----------------------------------"
+echo "Set Timezone"
+echo "----------------------------------"
+if [ ! -s $SIMPLE_CONFIG_DIR/config/timezone ]
+then
+    echo "No timezone info available in site_level_config_file."
+else
+    mv /etc/localtime /etc/localtime.backup
+    ln -s /usr/share/zoneinfo/$(cat $SIMPLE_CONFIG_DIR/config/timezone) /etc/localtime
+fi
+
+echo "----------------------------------"
 echo "Starting daemons"
 echo "----------------------------------"
 echo "Starting HTCondor"
