@@ -43,6 +43,6 @@ echo "----------------------------------"
 echo "Prepare for restarts "
 echo "----------------------------------"
 systemctl enable condor
-systemctl enable cron
+systemctl enable crond
 
 echo "Initialization Complete!"
