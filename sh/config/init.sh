@@ -6,6 +6,7 @@ echo "----------------------------------"
 # Copy HTCondor config files
 echo "Copying config files from $SMIPLE_CONFIG_DIR/config to $HTCONDOR_CONFIIG_DIR/config.d"
 cp $SIMPLE_CONFIG_DIR/config/50PC.conf $HTCONDOR_CONFIG_DIR/config.d/50PC.conf
+
 # Create Slot accounts dynamically
 SLOTS_FILE="/etc/simple_grid/config/slots"
 while IFS= read -r USER
@@ -29,6 +30,22 @@ else
     mv /etc/localtime /etc/localtime.backup
     ln -s /usr/share/zoneinfo/$(cat $SIMPLE_CONFIG_DIR/config/timezone) /etc/localtime
 fi
+
+echo "----------------------------------"
+echo "Creating user accounts"
+echo "----------------------------------"
+# Create users dynamically
+while IFS=" = " read -r key value; do
+	case "$key" in
+		SUPPORTED_VO_USERS)
+    for user in ${value//,/ }
+    do
+	    adduser -m $user
+    done ;;
+	esac
+  done < $SIMPLE_CONFIG_DIR/config/supported_vo_users.conf
+
+chmod 777 /home/*
 
 echo "----------------------------------"
 echo "Starting daemons"

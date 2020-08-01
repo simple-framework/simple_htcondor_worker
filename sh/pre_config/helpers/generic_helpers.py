@@ -88,3 +88,40 @@ def get_batch_dns_info(augmented_site_level_config):
                         "augmented site level config file.")
 
     return dns
+
+
+def get_supported_vos(augmented_site_level_config):
+    return [vo['name'] for vo in augmented_site_level_config['supported_virtual_organizations']]
+
+
+def get_fqan_for_vo(vo, augmented_site_level_config, lightweight_component):
+    voms_config = get_voms_config(augmented_site_level_config, lightweight_component)
+    return [fqan for fqan in voms_config if fqan['vo']['name'] == vo]
+
+
+def get_primary_user_for_fqan(fqan, augmented_site_level_config, lightweight_component):
+    voms_config = [x for x in get_voms_config(augmented_site_level_config, lightweight_component)
+                   if x['voms_fqan'] == fqan
+                   ]
+    pool_accounts = list(
+        {x['pool_accounts'][y]['base_name']: x['pool_accounts'][y] for x in voms_config
+         for y in range(0, len(x['pool_accounts']))}.values())
+    if len(pool_accounts) == 1:
+        return pool_accounts[0]['base_name']
+    else:
+        for pool_account in pool_accounts:
+            if "sgm" in pool_account['base_name']:
+                return pool_account['base_name']
+        return pool_accounts[len(pool_accounts) - 1]['base_name']
+
+
+def get_all_linux_users_as_list(augmented_site_level_config, lightweight_component):
+    voms_config = get_voms_config(augmented_site_level_config, lightweight_component)
+    pool_accounts = list(
+        {x['pool_accounts'][y]['base_name']: x['pool_accounts'][y] for x in voms_config
+         for y in range(0, len(x['pool_accounts']))}.values())
+    users = []
+    for pool_account in pool_accounts:
+        users.extend(
+            [pool_account['base_name'] + "{0:0=3d}".format(x) for x in range(1, pool_account['users_num'] + 1)])
+    return users

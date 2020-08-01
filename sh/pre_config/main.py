@@ -6,6 +6,7 @@ from files.config_50PC import WorkerConfig
 from files.slots import Slots
 from files.timezone import TimeZone
 from files.supplemental_config import SupplementalConfig
+from files.supported_vo_users import SupportedVOUsers
 
 from helpers.generic_helpers import get_lightweight_component
 
@@ -40,6 +41,11 @@ if __name__ == "__main__":
     timezone = TimeZone("{output_dir}/timezone".format(output_dir=output_dir), augmented_site_level_config, execution_id)
     timezone.generate_output_file()
 
+    supported_vo_users = SupportedVOUsers("{output_dir}/supported_vo_users.conf".format(output_dir=output_dir),
+                                          augmented_site_level_config, execution_id)
+    supported_vo_users.generate_output_file()
+
+    # supplemental config
     lc = get_lightweight_component(augmented_site_level_config, execution_id)
 
     if os.path.exists('{output_dir}/supplemental_mapfile'.format(output_dir=output_dir)):
