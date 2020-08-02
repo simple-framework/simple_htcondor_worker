@@ -1,4 +1,4 @@
 expected-from-site-level-config:
   condor_host_execution_id: {type: int(), required: true, use_default: false, description: "The execution_id of the HTCondor-Batch lightweight component used by the site admin in the site_level_config_file"}
   num_slots: {type: int(), required: true, use_default: true, description: "Corresponds to NUM_SLOTS knob got Startd."}
-  user_accounts: {type: list(str()): required: false, use_default: false, description: "A list of user accounts that should be created in the container."}
+  user_accounts: {type: list(str()), required: false, use_default: false, description: "A list of user accounts that should be created in the container."}
